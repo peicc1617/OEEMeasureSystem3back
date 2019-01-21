@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>创新方法工作平台</title>
+	  <!--添加页面框架-->
+	  <link rel="import" id="frame" href="/webresources/common/html/appFrame.html">
+	  <script type="text/javascript" src="js/buttonAction.js"></script>
+	<!--引入bootstrap-table-->
+	<!--1.引入bootstrap-table.css-->
+	<link rel="stylesheet" href="./bootstrap/bootstrap-table/bootstrap-table.css">
+	<!--2.引入 jQuery 库，bootstrap 库和 bootstrap-table.js-->
+	<script type="text/javascript" src="./ace-master/assets/js/jquery.dataTables.min.js"></script>
+	<script src="./bootstrap/bootstrap-table/bootstrap-table.js"></script>
+	<script src="./bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+	<!--引入echarts-->
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+	<!--引入表格编辑js-->
+	<script src="./js/tableEdit.js"></script>
+	<!--引入表格数据处理js-->
+	<script src="./js/dataProcess.js"></script>
+	<script src="./js/oee.js"></script>
+	<!--引入显示图表js-->
+	<script src="./js/showgraph.js"></script>
+
+</head>
+<body class="no-skin">
+<div id="mainFunctionHtml">
+	  <div id="myCustomLi">
+			<li class="active">
+				  <a data-toggle="tab" href="#abc">
+						<i class="green ace-icon fa fa-desktop bigger-120"></i>OEE数据录入</a>
+			</li>
+			<li class="">
+				  <a data-toggle="tab" href="#def">
+						<i class="purple ace-icon fa fa-pencil-square-o bigger-120"></i>OEE计算</a>
+			</li>
+	  </div>
+	  <div id="myCustomTab">
+			<div class="tab-pane active" id="abc">
+				  <div id="mainBtnGroup" class="btn-group btn-group-sm">
+					  <button type="button" class="btn btn-info" onclick="addrow()">
+						  <span class="glyphicon glyphicon-plus"></span>添加设备
+					  </button>
+					  <button type="button" class="btn btn-danger" style="margin-right: 40px" onclick="deleterow()">
+						  <span class="glyphicon glyphicon-trash"></span>删除设备
+					  </button>
+						<button type="button" class="btn btn-info">
+							  <span class="glyphicon glyphicon-upload"></span>文件模板下载
+						</button>
+						<button type="button" class="btn btn-info">
+							  <span class="glyphicon glyphicon-import"></span>文件导入
+						</button>
+						<button type="button" class="btn btn-info" id="saveProject" onclick="saveProject()">
+							  <span class="glyphicon glyphicon-save"></span>保存
+						</button>
+					    <button id="saveAsProject" type="button" class="btn btn-info" data-toggle="modal" data-target="#saveAsModal">
+						  <span class="glyphicon glyphicon-log-in"></span>另存
+					    </button>
+				  </div>
+				<div>
+					<table id="myBootstrapTable" data-toggle="table" data-search="true" data-show-refresh="true"
+						   data-show-toggle="true" data-toolbar="#toolbar" data-pagination="true"
+						   data-side-pagination="client">
+						<thead>
+						<tr align="center" valign="middle">
+							<th colspan="17" data-align="center" class="active" ><h4>生产线设备综合效率记录表</h4></th>
+						</tr>
+						<tr>
+							<th colspan="17" data-field="basicInformation">
+									产品名称<input type="text" id="product_name1" size="15" style="margin-left: 10px" style="margin-right: 30px" />
+									理论加工周期 ( 单位:min )<input type="text" id="theoretical_cycle1" size="15" style="margin-left: 10px" style="margin-right: 30px" />
+									实际加工周期 ( 单位:min )<input type="text" id="actual_cycle1" size="15" style="margin-left: 10px" style="margin-right: 30px" />
+							</th>
+						</tr>
+						<tr>
+							<th data-field="state" data-checkbox="true" rowspan="2" data-align="center" data-valign="middle"></th>
+							<th data-field="procedureIdForDelete" data-visible="false" rowspan="2">procedureId</th>
+							<th data-field="calendar_data"   rowspan="2" data-align="center" data-valign="middle" >日期</th>
+							<th data-field="machine_name"   rowspan="2" data-align="center" data-valign="middle" >设备名称</th>
+							<th data-field="calendar_time" rowspan="2" data-align="center" data-valign="middle">日历时间</th>
+							<th data-field="plannedDowntime_loss" colspan="3" data-align="center" data-valign="middle">计划停机损失</th>
+							<th colspan="4" data-align="center">停机损失</th>
+							<th colspan="2" data-align="center">性能损失</th>
+							<th colspan="2" data-align="center">质量损失</th>
+							<th data-field="action" data-formatter="actionFormatter" data-events="actionEvents"  rowspan="2" data-align="center" data-valign="middle">编辑</th>
+						</tr>
+						<tr>
+							<th data-field="rest_time" data-align="center">休息时间</th>
+							<th data-field="downtime_maintenance" data-align="center">停机保养</th>
+							<th data-field="downtime_noEquipment" data-align="center">非设备因素停机</th>
+							<th data-field="downtime_loss" data-align="center">故障停机</th>
+							<th data-field="start_shutdown" data-align="center">开停机</th>
+							<th data-field="product_change" data-align="center">更换品种</th>
+							<th data-field="equipment_adjustment" data-align="center">设备调整</th>
+							<th data-field="speed_loss" data-align="center">速度降低</th>
+							<th data-field="small_downtime" data-align="center">空转、间歇停机</th>
+							<th data-field="defect_quantity" data-align="center">废次品数量</th>
+							<th data-field="total_quantity" data-align="center">总产品数量</th>
+						</tr>
+						</thead>
+					</table>
+					<br>
+				</div>
+			</div>
+			<div class="tab-pane" id="def">
+				<div id="mainBtnGroup1" class="btn-group btn-group-sm">
+					<button type="button" class="btn btn-info" onclick="calculateOEE()">
+						<span class="glyphicon glyphicon-plus"></span>OEE分析
+					</button>
+					<button type="button" class="btn btn-info" onclick="calculateOEE_back()">
+						<span class="glyphicon glyphicon-plus"></span>OEE分析(后端处理)
+					</button>
+					<button type="button" class="btn btn-danger" style="margin-right: 40px" onclick="">
+						<span class="glyphicon glyphicon-trash"></span>导出图片
+					</button>
+				</div>
+				<!--显示OEE各项指标表格-->
+				<div>
+					<table id="myBootstrapTable1" data-toggle="table" data-search="true" data-show-refresh="true"
+						   data-show-toggle="true" data-toolbar="#toolbar" data-pagination="true"
+						   data-side-pagination="client">
+						<thead>
+						<tr align="center" >
+							<th colspan="18" data-align="center" class="active" ><h4>生产线设备综合效率指标</h4></th>
+						</tr>
+						<tr>
+							<th data-field="state" data-checkbox="true"  data-align="center" ></th>
+							<th data-field="machineName"    data-align="center">设备名称</th>
+							<th data-field="TimeRate"   data-align="center">时间开动率</th>
+							<th data-field="performanceRate"  data-align="center">性能开动率</th>
+							<th data-field="qualityRate"  data-align="center">合格品率</th>
+							<th data-field="OEE"  data-align="center">OEE</th>
+							<th data-field="TEEP"  data-align="center">TEEP</th>
+						</tr>
+						</thead>
+					</table>
+					<br>
+				</div>
+				<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+				<div id="OEECharts" style="height: 430px; width: 100%;"></div>
+				<br>
+			</div>
+	  </div>
+</div>
+<!--帮助页面-->
+<div id="helpHtml">
+	  <div class="page-header">
+			<h1>
+				  **App使用说明
+			</h1>
+	  </div>
+	  <div class="alert alert-block alert-success" id="appHelp">
+			<div class="helpClass">
+				  <p class="helpP">
+						<i class="ace-icon fa fa-check green"></i>
+						欢迎使用<strong class="green">App</strong>, 使用流程如下：<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;1、首先*****<br>
+						截图<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;2、其次*****<br>
+						截图<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;3、最后*****<br>
+						截图<br>
+				  <p>
+			</div>
+	  </div>
+</div>
+<!--模态对话框界面-->
+<!--添加设备模态对话框-->
+<div id="addItem" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">添加设备相关数据</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="addItemPop">
+					<table>
+						<tr>
+							<td>日期：</td> <td><input type="text" id="calendar_data1" size="20" style="margin-right: 10px" value="2019/01/27"/></td>
+							<td>设备名称：</td> <td><input type="text" id="machine_name1" size="20" style="margin-right: 10px" value="机床1"/></td>
+						</tr>
+						<tr>
+							<td >日历时间：</td> <td><input type="text" id="calendar_time1" size="20" value="0"/></td>
+							<td >休息时间：</td> <td><input type="text" id="rest_time1" size="20" value="0"/></td>
+						</tr>
+						<tr>
+							<td >停机保养：</td> <td><input type="text" id="downtime_maintenance1" size="20" value="0"/></td>
+							<td >非设备因素停机：</td> <td><input type="text" id="downtime_noEquipment1" size="20" value="0"/></td>
+						</tr>
+						<tr>
+							<td >故障停机：</td> <td><input type="text" id="downtime_loss1" size="20" value="0"/></td>
+							<td>开停机：</td> <td><input type="text" id="start_shutdown1" size="20" style="margin-right: 10px" value="0"/></td>
+						</tr>
+						<tr>
+							<td >更换品种：</td> <td><input type="text" id="product_change1" size="20" value="0"/></td>
+							<td>设备调整：</td> <td><input type="text" id="equipment_adjustment1" size="20" style="margin-right: 10px" value="0"/></td>
+						</tr>
+						<tr>
+							<td>速度降低：</td> <td><input type="text" id="speed_loss1" size="20" style="margin-right: 10px" value="0"/></td>
+							<td >空转、间歇停机：</td> <td><input type="text" id="small_downtime1" size="20" value="0"/></td>
+						</tr>
+						<tr>
+							<td >废次品损失：</td> <td><input type="text" id="defect_quantity1" size="20" value="0"/></td>
+							<td >总产品数量：</td> <td><input type="text" id="total_quantity1" size="20" value="0"/></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="addItem()">确定</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--编辑对话框-->
+<div id="editItem" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">编辑设备相关数据</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="editItemPop">
+					<table>
+						<tr>
+							<td>日期：</td> <td><input type="text" id="calendar_data2" size="20" style="margin-right: 10px" value="2019/01/27"/></td>
+							<td>设备名称：</td> <td><input type="text" id="machine_name2" size="20" style="margin-right: 10px" value="机床1"/></td>
+						</tr>
+						<tr>
+							<td >日历时间：</td> <td><input type="text" id="calendar_time2" size="20" value="0"/></td>
+							<td >休息时间：</td> <td><input type="text" id="rest_time2" size="20" value="0"/></td>
+						</tr>
+						<tr>
+							<td >停机保养：</td> <td><input type="text" id="downtime_maintenance2" size="20" value="0"/></td>
+							<td >非设备因素停机：</td> <td><input type="text" id="downtime_noEquipment2" size="20" value="0"/></td>
+						</tr>
+						<tr>
+							<td >故障停机：</td> <td><input type="text" id="downtime_loss2" size="20" value="0"/></td>
+							<td>开停机：</td> <td><input type="text" id="start_shutdown2" size="20" style="margin-right: 10px" value="0"/></td>
+						</tr>
+						<tr>
+							<td >更换品种：</td> <td><input type="text" id="product_change2" size="20" value="0"/></td>
+							<td>设备调整：</td> <td><input type="text" id="equipment_adjustment2" size="20" style="margin-right: 10px" value="0"/></td>
+						</tr>
+						<tr>
+							<td>速度降低：</td> <td><input type="text" id="speed_loss2" size="20" style="margin-right: 10px" value="0"/></td>
+							<td >空转、间歇停机：</td> <td><input type="text" id="small_downtime2" size="20" value="0"/></td>
+						</tr>
+						<tr>
+							<td >废次品损失：</td> <td><input type="text" id="defect_quantity2" size="20" value="0"/></td>
+							<td >总产品数量：</td> <td><input type="text" id="total_quantity2" size="20" value="0"/></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="editItem()">确定</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--另存为模态框-->
+<div class="modal fade" id="saveAsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="newProjectModalTitle">新建项目</h4>
+			</div>
+			<div class="modal-body">
+				<!--  -->
+				<div class="input-group">
+					<span class="input-group-addon">项目名：</span> <input type="text" class="form-control" placeholder="请输入项目名称" id="saveAsProjectNameModal">
+				</div>
+				<br>
+				<div class="input-group">
+					<span class="input-group-addon">备 注：</span> <input type="text" class="form-control" placeholder="请输入备注" id="saveAsProjectRemarkModal">
+				</div>
+				<br>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" onclick="saveAsProject()" id="saveAsProButton">确认</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--其他模态对话框-->
+</body>
+</html>
