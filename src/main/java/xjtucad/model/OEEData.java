@@ -2,169 +2,158 @@ package xjtucad.model;
 
 public class OEEData
 {
-    private String machineName;//设备名称
-    private double calendarTime;//日历时间
-    private double planneddowntimeLoss;//计划停机损失
-    private double downtimeLoss;//故障停机损失
-    private double startShutdown;//开关机
-    private double productChange;//更换产品
-    private double consumablePart;//易损件
-    private double managementLoss;//管理损失
-    private double operationalLoss;//操作损失
-    private double smallDowntime;//小停机
-    private double speedLoss;//速度损失
-    private double organizationLoss;//管理损失
-    private double logisticLoss;//后勤损失
-    private double defectQuantity;//不合格品数量
-    private double totalQuantity;//产品总数量
+    private String calendar_data;//日期
+    private String machine_name;//设备名称
+    private double calendar_time;//日历时间
+    private double rest_time;//休息时间
+    private double downtime_maintenance;//停机保养
+    private double downtime_noEquipment;//非设备因素停机
+    private double downtime_loss;//故障停机
+    private double start_shutdown;//开关机
+    private double product_change;//更换产品
+    private double equipment_adjustment;//设备调整
+    private double speed_loss;//速度降低
+    private double small_downtime;//空转、间歇停机
+    private double defect_quantity;//不合格品数量
+    private double total_quantity;//产品总数量
 
-    public String getMachineName()
+    public String getCalendar_data()
     {
-        return machineName;
+        return calendar_data;
     }
 
-    public void setMachineName(String machineName)
+    public void setCalendar_data(String calendar_data)
     {
-        this.machineName = machineName;
+        this.calendar_data = calendar_data;
     }
 
-    public double getCalendarTime()
+    public String getMachine_name()
     {
-        return calendarTime;
+        return machine_name;
     }
 
-    public void setCalendarTime(double calendarTime)
+    public void setMachine_name(String machine_name)
     {
-        this.calendarTime = calendarTime;
+        this.machine_name = machine_name;
     }
 
-    public double getPlanneddowntimeLoss()
+    public double getCalendar_time()
     {
-        return planneddowntimeLoss;
+        return calendar_time;
     }
 
-    public void setPlanneddowntimeLoss(double planneddowntimeLoss)
+    public void setCalendar_time(double calendar_time)
     {
-        this.planneddowntimeLoss = planneddowntimeLoss;
+        this.calendar_time = calendar_time;
     }
 
-    public double getDowntimeLoss()
+    public double getRest_time()
     {
-        return downtimeLoss;
+        return rest_time;
     }
 
-    public void setDowntimeLoss(double downtimeLoss)
+    public void setRest_time(double rest_time)
     {
-        this.downtimeLoss = downtimeLoss;
+        this.rest_time = rest_time;
     }
 
-    public double getStartShutdown()
+    public double getDowntime_maintenance()
     {
-        return startShutdown;
+        return downtime_maintenance;
     }
 
-    public void setStartShutdown(double startShutdown)
+    public void setDowntime_maintenance(double downtime_maintenance)
     {
-        this.startShutdown = startShutdown;
+        this.downtime_maintenance = downtime_maintenance;
     }
 
-    public double getProductChange()
+    public double getDowntime_noEquipment()
     {
-        return productChange;
+        return downtime_noEquipment;
     }
 
-    public void setProductChange(double productChange)
+    public void setDowntime_noEquipment(double downtime_noEquipment)
     {
-        this.productChange = productChange;
+        this.downtime_noEquipment = downtime_noEquipment;
     }
 
-    public double getConsumablePart()
+    public double getDowntime_loss()
     {
-        return consumablePart;
+        return downtime_loss;
     }
 
-    public void setConsumablePart(double consumablePart)
+    public void setDowntime_loss(double downtime_loss)
     {
-        this.consumablePart = consumablePart;
+        this.downtime_loss = downtime_loss;
     }
 
-    public double getManagementLoss()
+    public double getStart_shutdown()
     {
-        return managementLoss;
+        return start_shutdown;
     }
 
-    public void setManagementLoss(double managementLoss)
+    public void setStart_shutdown(double start_shutdown)
     {
-        this.managementLoss = managementLoss;
+        this.start_shutdown = start_shutdown;
     }
 
-    public double getOperationalLoss()
+    public double getProduct_change()
     {
-        return operationalLoss;
+        return product_change;
     }
 
-    public void setOperationalLoss(double operationalLoss)
+    public void setProduct_change(double product_change)
     {
-        this.operationalLoss = operationalLoss;
+        this.product_change = product_change;
     }
 
-    public double getSmallDowntime()
+    public double getEquipment_adjustment()
     {
-        return smallDowntime;
+        return equipment_adjustment;
     }
 
-    public void setSmallDowntime(double smallDowntime)
+    public void setEquipment_adjustment(double equipment_adjustment)
     {
-        this.smallDowntime = smallDowntime;
+        this.equipment_adjustment = equipment_adjustment;
     }
 
-    public double getSpeedLoss()
+    public double getSpeed_loss()
     {
-        return speedLoss;
+        return speed_loss;
     }
 
-    public void setSpeedLoss(double speedLoss)
+    public void setSpeed_loss(double speed_loss)
     {
-        this.speedLoss = speedLoss;
+        this.speed_loss = speed_loss;
     }
 
-    public double getOrganizationLoss()
+    public double getSmall_downtime()
     {
-        return organizationLoss;
+        return small_downtime;
     }
 
-    public void setOrganizationLoss(double organizationLoss)
+    public void setSmall_downtime(double small_downtime)
     {
-        this.organizationLoss = organizationLoss;
+        this.small_downtime = small_downtime;
     }
 
-    public double getLogisticLoss()
+    public double getDefect_quantity()
     {
-        return logisticLoss;
+        return defect_quantity;
     }
 
-    public void setLogisticLoss(double logisticLoss)
+    public void setDefect_quantity(double defect_quantity)
     {
-        this.logisticLoss = logisticLoss;
+        this.defect_quantity = defect_quantity;
     }
 
-    public double getDefectQuantity()
+    public double getTotal_quantity()
     {
-        return defectQuantity;
+        return total_quantity;
     }
 
-    public void setDefectQuantity(double defectQuantity)
+    public void setTotal_quantity(double total_quantity)
     {
-        this.defectQuantity = defectQuantity;
-    }
-
-    public double getTotalQuantity()
-    {
-        return totalQuantity;
-    }
-
-    public void setTotalQuantity(double totalQuantity)
-    {
-        this.totalQuantity = totalQuantity;
+        this.total_quantity = total_quantity;
     }
 }

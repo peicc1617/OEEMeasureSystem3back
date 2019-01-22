@@ -29,7 +29,7 @@
 	<script src="./js/dataProcess.js"></script>
 	<script src="./js/oee.js"></script>
 	<!--引入显示图表js-->
-	<script src="./js/showgraph.js"></script>
+	<script src="js/result.js"></script>
 
 </head>
 <body class="no-skin">
@@ -113,20 +113,44 @@
 			</div>
 			<div class="tab-pane" id="def">
 				<div id="mainBtnGroup1" class="btn-group btn-group-sm">
-					<button type="button" class="btn btn-info" onclick="calculateOEE()">
-						<span class="glyphicon glyphicon-plus"></span>OEE分析
-					</button>
+					<!--<button type="button" class="btn btn-info" onclick="showLoss()">-->
+						<!--<span class="glyphicon glyphicon-plus"></span>设备损失分析-->
+					<!--</button>-->
 					<button type="button" class="btn btn-info" onclick="calculateOEE_back()">
-						<span class="glyphicon glyphicon-plus"></span>OEE分析(后端处理)
+						<span class="glyphicon glyphicon-plus"></span>OEE指标分析
 					</button>
 					<button type="button" class="btn btn-danger" style="margin-right: 40px" onclick="">
 						<span class="glyphicon glyphicon-trash"></span>导出图片
 					</button>
 				</div>
+				<!--显示OEE各种损失类型以及操作时间-->
+				<div>
+					<table id="myBootstrapTable2" data-toggle="table" data-search="true" data-show-refresh="true"
+						   data-show-toggle="true" data-toolbar="#toolbar" data-pagination="true" data-show-columns="true"
+						   data-side-pagination="client">
+						<thead>
+						<tr align="center" >
+							<th colspan="18" data-align="center" class="active" ><h4>生产线设备损失分析</h4></th>
+						</tr>
+						<tr>
+							<th data-field="state" data-checkbox="true"  data-align="center" ></th>
+							<th data-field="machineName"    data-align="center">设备名称</th>
+							<th data-field="calendarTime"   data-align="center">日历时间</th>
+							<th data-field="plannedDowntimeLoss"   data-align="center">计划停机损失</th>
+							<th data-field="actualWorkTime"  data-align="center">实际操作时间</th>
+							<th data-field="downtimeLoss"  data-align="center">停机损失</th>
+							<th data-field="netWorkTime"  data-align="center">净操作时间</th>
+							<th data-field="defectQuantity"  data-align="center">不合格品数量</th>
+							<th data-field="totalQuantity"  data-align="center">产品总数量</th>
+						</tr>
+						</thead>
+					</table>
+					<br>
+				</div>
 				<!--显示OEE各项指标表格-->
 				<div>
 					<table id="myBootstrapTable1" data-toggle="table" data-search="true" data-show-refresh="true"
-						   data-show-toggle="true" data-toolbar="#toolbar" data-pagination="true"
+						   data-show-toggle="true" data-toolbar="#toolbar" data-pagination="true" data-show-columns="true"
 						   data-side-pagination="client">
 						<thead>
 						<tr align="center" >
@@ -135,8 +159,9 @@
 						<tr>
 							<th data-field="state" data-checkbox="true"  data-align="center" ></th>
 							<th data-field="machineName"    data-align="center">设备名称</th>
-							<th data-field="TimeRate"   data-align="center">时间开动率</th>
-							<th data-field="performanceRate"  data-align="center">性能开动率</th>
+							<th data-field="equipmentUtilizationRate"   data-align="center">设备利用率</th>
+							<th data-field="timeUtilizationRate"   data-align="center">时间开动率</th>
+							<th data-field="performanceUtilizationRate"  data-align="center">性能开动率</th>
 							<th data-field="qualityRate"  data-align="center">合格品率</th>
 							<th data-field="OEE"  data-align="center">OEE</th>
 							<th data-field="TEEP"  data-align="center">TEEP</th>

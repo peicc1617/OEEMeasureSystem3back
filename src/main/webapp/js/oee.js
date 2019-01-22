@@ -12,8 +12,9 @@ function calculateOEE_back() {
         url:'oeeCalculate',
         data:{productName:productName,theoreticalCycle:theoreticalCycle,actualCycle:actualCycle,dataFromTable:dataFromTable},
         success:function(data){
-          // alert("后台处理完毕！"+decodeURIComponent(data));
-            alert("后台处理完毕！"+data);
+            // alert("后台处理完毕！"+decodeURIComponent(data));
+            data=JSON.parse(data);
+            showOEEIndicator(data);
 
         },
         error:function (data) {
