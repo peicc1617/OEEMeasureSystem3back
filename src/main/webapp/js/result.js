@@ -266,4 +266,5 @@ function showEcharts(datalist)
             }
         ]
     });
+   picInfo = myChart.getDataURL();
 }

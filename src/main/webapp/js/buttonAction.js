@@ -66,22 +66,20 @@ function removeSelfDefine(result) {
 //定制初始化内容
 function setCustomContext() {
     // canvas图片获取方式
-    var img = $("#canvas")[0];  //选择页面中的img元素
+    // var img = $("#canvas")[0];  //选择页面中的img元素
     var image = new Image();
-    if (img != null) {
-        image.src = img.toDataURL("image/png");
+    if (picInfo) {
+        image.src = picInfo;
     }
-    var img1 = image;
+    // var img1 = image;
     // 其他示例
-    var img2 = $("#image2Id");  //选择页面中的img元素
-    var wordImgArr = [img1, img2];//定义图片数组
+    // var img2 = $("#image2Id");  //选择页面中的img元素
+    // var wordImgArr = [img1, img2];//定义图片数组
     var customText = {//word编辑区自定义文本内容
-        'title': "<h2>1 **App分析结果 </h2>",
-        'chap1': "<h3>1.1 *******</h3>",
-        'img1': wordImgArr[0],
-        'chap2': "<h3>1.2 *******</h3>",
-        'img2': wordImgArr[1],
-        'chap3': "<h3>1.3 结论****</h3>"
+        'title': "<h2>设备综合效率App分析结果 </h2>",
+        'chap1': "<h3>根据设备损失指标分析结果如下图所示：</h3>",
+        'img1': image,
+        'chap2': "<h3>根据OEE指标进行后续故障分析。</h3>",
     };
     for (var variable in customText) {//遍历自定义文本对象
         $("#WYeditor").append(customText[variable]);//插入元素
